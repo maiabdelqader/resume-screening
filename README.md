@@ -136,6 +136,7 @@ To re-train the fusion model:
 
 ```bash
 python rag_pipeline/train_fusion_model.py
+```
 
 ---
 
