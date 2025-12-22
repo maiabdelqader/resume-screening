@@ -2,7 +2,7 @@
 
 This repository contains the implementation of the MSc dissertation project:
 
-**Enhanced Resume Screening Using Large Language Models with Retrieval-Augmented Generation (RAG) Pipelines**
+**Enhanced Resume Screening Using Large Language Models with Retrieval-Augmented Generation Pipelines**
 
 **Author:** Mai Ali Abdel Qader  
 **Degree:** MSc Artificial Intelligence  
