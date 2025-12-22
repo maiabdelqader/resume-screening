@@ -2,7 +2,7 @@
 
 This repository contains the implementation of the MSc dissertation project:
 
-**Enhanced Resume Screening Using Large Language Models with Retrieval-Augmented Generation Pipelines**
+**Enhanced Resume Screening Using Large Language Models with Retrieval-Augmented Generation (RAG) Pipelines**
 
 **Author:** Mai Ali Abdel Qader  
 **Degree:** MSc Artificial Intelligence  
@@ -19,7 +19,7 @@ Two pipelines are implemented under identical experimental conditions:
 - **Basic RAG Pipeline** – single-query semantic retrieval  
 - **Advanced RAG Pipeline** – multi-subquery retrieval with heuristic optimisation, hybrid dense–sparse retrieval, and score-aware fusion
 
-All outputs are generated using open-source LLaMA models and are strictly grounded in retrieved resume evidence, reducing hallucination in high-stakes recruitment scenarios.
+All outputs are generated using open-source LLaMA models and are strictly grounded in retrieved resume evidence.
 
 ---
 
@@ -29,7 +29,7 @@ All outputs are generated using open-source LLaMA models and are strictly ground
 - Multi-objective heuristic subquery scoring
 - Hybrid dense–sparse retrieval (FAISS + TF-IDF)
 - Score-aware Reciprocal Rank Fusion (RRF)
-- Optional data-driven fusion via logistic regression
+- **Data-driven dense–sparse fusion using logistic regression**
 - Evidence-grounded LLM-based candidate ranking
 - Quantitative evaluation using RAGAS
 
@@ -63,6 +63,7 @@ resume-screening/
 - Each subquery retrieves resumes independently
 - Results merged using score-aware RRF
 - Hybrid retrieval combines dense (FAISS) and sparse (TF-IDF) similarity
+- **Learned dense–sparse fusion applied at retrieval time**
 
 ---
 
@@ -87,11 +88,50 @@ Both variables must be set prior to execution.
 
 ---
 
+### Selecting Pipeline Mode (Basic vs Advanced)
+
+In the main entry script, select the retrieval mode:
+
+```python
+rag_mode = "basic"      # or "advanced"
+```
+
+---
+
+### Selecting the LLaMA Model (LLaMA 3.1 or LLaMA 2)
+
+The pipeline supports running with different LLaMA models.  
+The model is selected via environment configuration and passed at runtime.
+
+```python
+# Use LLaMA 3.1 (default)
+model_name = llama3_8b_model
+
+# Switch to LLaMA 2 if required
+# model_name = llama2_13b_model
+```
+
+---
+
 Run the main entry script from the project root:
 
 ```bash
 python rag_pipeline/main.py
 ```
+
+---
+
+## 🧪 Data-Driven Fusion (Required)
+
+The advanced pipeline **requires** a learned dense–sparse fusion model.
+
+Before running the Advanced RAG pipeline, train the fusion model using:
+
+```bash
+python rag_pipeline/train_fusion_model.py
+```
+
+This trains a logistic regression model that replaces fixed heuristic weights and is automatically loaded during retrieval.
 
 ---
 
@@ -104,18 +144,6 @@ System outputs are evaluated using RAGAS metrics:
 - Answer Similarity
 
 Evaluation results are exported as CSV files for analysis.
-
----
-
-## 🧪 Data-Driven Fusion (Optional)
-
-To train a learned dense–sparse fusion model:
-
-```bash
-python rag_pipeline/train_fusion_model.py
-```
-
-This replaces fixed heuristic weights with a lightweight logistic regression model.
 
 ---
 
