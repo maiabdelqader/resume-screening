@@ -121,17 +121,21 @@ python rag_pipeline/main.py
 
 ---
 
-## 🧪 Data-Driven Fusion (Required)
+## 🧪 Data-Driven Fusion
 
-The advanced pipeline **requires** a learned dense–sparse fusion model.
+The Advanced RAG pipeline uses a learned dense–sparse fusion model (logistic regression)
+to combine semantic and lexical retrieval signals.
 
-Before running the Advanced RAG pipeline, train the fusion model using:
+A pre-trained fusion model is already included and is automatically loaded at runtime
+when running the Advanced pipeline.
+
+Re-training the fusion model is only required if you want to regenerate it
+(e.g., after modifying the training data, retrieval features, or fusion logic).
+
+To re-train the fusion model:
 
 ```bash
 python rag_pipeline/train_fusion_model.py
-```
-
-This trains a logistic regression model that replaces fixed heuristic weights and is automatically loaded during retrieval.
 
 ---
 
