@@ -12,12 +12,12 @@ This repository contains the implementation of the MSc dissertation project:
 
 ## 📌 Project Overview
 
-This project evaluates the impact of structured query decomposition and advanced retrieval strategies on automated resume screening within a Retrieval-Augmented Generation (RAG) framework.
+This project evaluates the impact of structured query decomposition and advanced retrieval strategies on automated resume screening within a RAG framework.
 
 Two pipelines are implemented under identical experimental conditions:
 
-- **Basic RAG Pipeline** – single-query semantic retrieval  
-- **Advanced RAG Pipeline** – multi-subquery retrieval with heuristic optimisation, hybrid dense–sparse retrieval, and score-aware fusion
+- **Basic RAG Pipeline** - single-query semantic retrieval  
+- **Advanced RAG Pipeline** - multi-subquery retrieval with heuristic optimisation, hybrid dense-sparse retrieval, and score-aware fusion
 
 All outputs are generated using open-source LLaMA models and are strictly grounded in retrieved resume evidence.
 
@@ -27,9 +27,9 @@ All outputs are generated using open-source LLaMA models and are strictly ground
 
 - Structured job-description subquery decomposition
 - Multi-objective heuristic subquery scoring
-- Hybrid dense–sparse retrieval (FAISS + TF-IDF)
+- Hybrid dense-sparse retrieval (FAISS + TF-IDF)
 - Score-aware Reciprocal Rank Fusion (RRF)
-- Data-driven dense–sparse fusion using logistic regression
+- Data-driven dense-sparse fusion using logistic regression
 - Evidence-grounded LLM-based candidate ranking
 - Quantitative evaluation using RAGAS
 
@@ -58,12 +58,12 @@ resume-screening/
 - Serves as a controlled baseline
 
 ### Advanced RAG Pipeline
-- Decomposes job descriptions into 3–5 focused subqueries
+- Decomposes job descriptions into 3-5 focused subqueries
 - Subqueries scored using coverage, redundancy penalty, specificity, and topical diversity
 - Each subquery retrieves resumes independently
 - Results merged using score-aware RRF
 - Hybrid retrieval combines dense (FAISS) and sparse (TF-IDF) similarity
-- Learned dense–sparse fusion applied at retrieval time
+- Learned dense-sparse fusion applied at retrieval time
 
 ---
 
@@ -123,7 +123,7 @@ python rag_pipeline/main.py
 
 ## 🧪 Data-Driven Fusion
 
-The Advanced RAG pipeline uses a learned dense–sparse fusion model (logistic regression)
+The Advanced RAG pipeline uses a learned dense-sparse fusion model (logistic regression)
 to combine semantic and lexical retrieval signals.
 
 A pre-trained fusion model is already included and is automatically loaded at runtime
