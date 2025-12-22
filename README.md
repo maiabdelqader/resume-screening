@@ -119,32 +119,6 @@ This replaces fixed heuristic weights with a lightweight logistic regression mod
 
 ---
 
-## 🔁 Reproducibility Notes
-
-- Identical datasets and prompts are used across pipelines
-- Deterministic generation settings where applicable
-- Strict grounding enforced in LLaMA prompts
-- Raw resumes and FAISS indexes are excluded for privacy
-
----
-
-## 📄 Ethics & Compliance
-
-This project received **University of Bath Ethical Approval (12807-14962)**.  
-All resumes used in experiments were anonymised.
-
----
-
-## 📚 Citation
-
-```
-Abdel Qader, M. A. (2025).
-Enhanced Resume Screening Using Large Language Models with Retrieval-Augmented Generation Pipelines.
-MSc Dissertation, University of Bath.
-```
-
----
-
 ## 📜 License
 
 Released for academic and research purposes only.
