@@ -29,7 +29,7 @@ All outputs are generated using open-source LLaMA models and are strictly ground
 - Multi-objective heuristic subquery scoring
 - Hybrid dense–sparse retrieval (FAISS + TF-IDF)
 - Score-aware Reciprocal Rank Fusion (RRF)
-- **Data-driven dense–sparse fusion using logistic regression**
+- Data-driven dense–sparse fusion using logistic regression
 - Evidence-grounded LLM-based candidate ranking
 - Quantitative evaluation using RAGAS
 
@@ -63,7 +63,7 @@ resume-screening/
 - Each subquery retrieves resumes independently
 - Results merged using score-aware RRF
 - Hybrid retrieval combines dense (FAISS) and sparse (TF-IDF) similarity
-- **Learned dense–sparse fusion applied at retrieval time**
+- Learned dense–sparse fusion applied at retrieval time
 
 ---
 
