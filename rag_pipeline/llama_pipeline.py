@@ -78,7 +78,7 @@ class LlamaPipeline:
         # - torch_dtype=torch.float16 for reduced memory usage and better performance
         model = AutoModelForCausalLM.from_pretrained(
             self.model_name,
-            device_map={"": "cuda:3"},
+            device_map="auto",
             quantization_config=bnb_config,
             token=self.huggingface_token,
             torch_dtype=torch.float16,

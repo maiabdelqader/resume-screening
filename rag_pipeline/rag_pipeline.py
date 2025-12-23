@@ -86,7 +86,7 @@ class RAGPipeline:
         # Load the same embedding model used in FAISS engine
         self.embedder = HuggingFaceEmbeddings(
             model_name=self.resume_engine.model_name,
-            model_kwargs={"device": torch.device("cuda:6")}
+            model_kwargs={"device": torch.device("cuda")}
         )
 
         # Initialize subquery optimizer to rank subqueries

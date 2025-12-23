@@ -120,7 +120,7 @@ class ResumeEngine:
         # Initialize the embedding model
         embedder = HuggingFaceEmbeddings(
             model_name=self.model_name,
-            model_kwargs={"device": torch.device("cuda:1")}
+            model_kwargs={"device": torch.device("cuda")}
         )
 
         # Check if a pre-built FAISS index already exists on disk

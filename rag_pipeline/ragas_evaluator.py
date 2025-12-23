@@ -46,7 +46,7 @@ class RAGASEvaluator:
         # Load semantic embedding model from Hugging Face
         self.embedding_model = HuggingFaceEmbeddings(
             model_name=self.embedding_model_name,
-            model_kwargs={"device": torch.device("cuda:1")}
+            model_kwargs={"device": torch.device("cuda")}
         )
 
     def run_evaluation(self, dataset: Dataset) -> pd.DataFrame:
