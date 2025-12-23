@@ -2,7 +2,7 @@
 
 This repository contains the implementation of the MSc dissertation project:
 
-**Enhanced Resume Screening Using Large Language Models with Retrieval-Augmented Generation (RAG) Pipelines**
+**Enhanced Resume Screening Using Large Language Models (LLMs) with Retrieval-Augmented Generation (RAG) Pipelines**
 
 **Author:** Mai Ali Abdel Qader  
 **Degree:** MSc Artificial Intelligence  
@@ -12,14 +12,14 @@ This repository contains the implementation of the MSc dissertation project:
 
 ## 📌 Project Overview
 
-This project evaluates the impact of structured query decomposition and advanced retrieval strategies on automated resume screening within a Retrieval-Augmented Generation (RAG) framework.
+This project evaluates the impact of structured query decomposition and advanced retrieval strategies on automated resume screening within a RAG framework.
 
 Two pipelines are implemented under identical experimental conditions:
 
-- **Basic RAG Pipeline** – single-query semantic retrieval  
-- **Advanced RAG Pipeline** – multi-subquery retrieval with heuristic optimisation, hybrid dense–sparse retrieval, and score-aware fusion
+- **Basic RAG Pipeline** - single-query semantic retrieval  
+- **Advanced RAG Pipeline** - multi-subquery retrieval with heuristic optimisation, hybrid dense-sparse retrieval, and score-aware fusion
 
-All outputs are generated using open-source LLaMA models and are strictly grounded in retrieved resume evidence, reducing hallucination in high-stakes recruitment scenarios.
+All outputs are generated using open-source LLaMA models and are strictly grounded in retrieved resume evidence.
 
 ---
 
@@ -27,9 +27,9 @@ All outputs are generated using open-source LLaMA models and are strictly ground
 
 - Structured job-description subquery decomposition
 - Multi-objective heuristic subquery scoring
-- Hybrid dense–sparse retrieval (FAISS + TF-IDF)
+- Hybrid dense-sparse retrieval (FAISS + TF-IDF)
 - Score-aware Reciprocal Rank Fusion (RRF)
-- Optional data-driven fusion via logistic regression
+- Data-driven dense-sparse fusion using logistic regression
 - Evidence-grounded LLM-based candidate ranking
 - Quantitative evaluation using RAGAS
 
@@ -58,11 +58,12 @@ resume-screening/
 - Serves as a controlled baseline
 
 ### Advanced RAG Pipeline
-- Decomposes job descriptions into 3–5 focused subqueries
+- Decomposes job descriptions into 3-5 focused subqueries
 - Subqueries scored using coverage, redundancy penalty, specificity, and topical diversity
 - Each subquery retrieves resumes independently
 - Results merged using score-aware RRF
 - Hybrid retrieval combines dense (FAISS) and sparse (TF-IDF) similarity
+- Learned dense-sparse fusion applied at retrieval time
 
 ---
 
@@ -87,10 +88,54 @@ Both variables must be set prior to execution.
 
 ---
 
+### Selecting Pipeline Mode (Basic vs Advanced)
+
+In the main entry script, select the retrieval mode:
+
+```python
+rag_mode = "basic"      # or "advanced"
+```
+
+---
+
+### Selecting the LLaMA Model (LLaMA 3.1 or LLaMA 2)
+
+The pipeline supports running with different LLaMA models.  
+The model is selected via environment configuration and passed at runtime.
+
+```python
+# Use LLaMA 3.1 (default)
+model_name = llama3_8b_model
+
+# Switch to LLaMA 2 if required
+# model_name = llama2_13b_model
+```
+
+---
+
 Run the main entry script from the project root:
 
 ```bash
 python rag_pipeline/main.py
+```
+
+---
+
+## 🧪 Data-Driven Fusion
+
+The Advanced RAG pipeline uses a learned dense-sparse fusion model (logistic regression)
+to combine semantic and lexical retrieval signals.
+
+A pre-trained fusion model is already included and is automatically loaded at runtime
+when running the Advanced pipeline.
+
+Re-training the fusion model is only required if you want to regenerate it
+(e.g., after modifying the training data, retrieval features, or fusion logic).
+
+To re-train the fusion model:
+
+```bash
+python rag_pipeline/train_fusion_model.py
 ```
 
 ---
@@ -104,44 +149,6 @@ System outputs are evaluated using RAGAS metrics:
 - Answer Similarity
 
 Evaluation results are exported as CSV files for analysis.
-
----
-
-## 🧪 Data-Driven Fusion (Optional)
-
-To train a learned dense–sparse fusion model:
-
-```bash
-python rag_pipeline/train_fusion_model.py
-```
-
-This replaces fixed heuristic weights with a lightweight logistic regression model.
-
----
-
-## 🔁 Reproducibility Notes
-
-- Identical datasets and prompts are used across pipelines
-- Deterministic generation settings where applicable
-- Strict grounding enforced in LLaMA prompts
-- Raw resumes and FAISS indexes are excluded for privacy
-
----
-
-## 📄 Ethics & Compliance
-
-This project received **University of Bath Ethical Approval (12807-14962)**.  
-All resumes used in experiments were anonymised.
-
----
-
-## 📚 Citation
-
-```
-Abdel Qader, M. A. (2025).
-Enhanced Resume Screening Using Large Language Models with Retrieval-Augmented Generation Pipelines.
-MSc Dissertation, University of Bath.
-```
 
 ---
 
