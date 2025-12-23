@@ -26,9 +26,9 @@ logging.basicConfig(level=logging.INFO,
 load_dotenv("../.env")
 
 # Load key configuration paths, model identifiers, and API tokens from environment variables
-faiss_path, resumes_path, gpt3_turbo_model, llama2_13b_model, llama3_8b_model, embedding_model, huggingface_token = map(
+faiss_path, resumes_path, llama2_13b_model, llama3_8b_model, embedding_model, huggingface_token = map(
     os.getenv,
-    ("FAISS_PATH", "RESUMES_PATH", "GPT3_TURBO_MODEL", "LLAMA2_13B_MODEL", "LLAMA3_8B_MODEL", "EMBEDDING_MODEL", "HUGGINGFACE_TOKEN")
+    ("FAISS_PATH", "RESUMES_PATH", "LLAMA2_13B_MODEL", "LLAMA3_8B_MODEL", "EMBEDDING_MODEL", "HUGGINGFACE_TOKEN")
 )
 
 # RAG Mode: "basic" or "advanced"
